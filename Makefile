@@ -6,7 +6,7 @@
 #    By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/08 19:01:12 by yrobotko          #+#    #+#              #
-#    Updated: 2017/10/16 14:23:04 by yrobotko         ###   ########.fr        #
+#    Updated: 2017/10/23 18:46:26 by yrobotko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ SRC =   asm.c \
 		asm9.c \
 		asm10.c \
 		asm11.c \
+		asm12.c \
+		asm13.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -50,6 +52,5 @@ fclean: clean
 	$(DEL) $(NAME)
 	$(DEL) libft.a
 	$(DEL) libft/libft.a
-re:	fclean
-	make
+re:	fclean all
 
