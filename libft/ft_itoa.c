@@ -3,39 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/08 17:32:58 by yrobotko          #+#    #+#             */
-/*   Updated: 2017/08/14 16:16:03 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/12/05 22:17:00 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/12/05 22:17:01 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(intmax_t value)
+static char	*allocate(long long nbr, size_t *len)
 {
-	int			i;
-	intmax_t	n;
-	char		*s;
-	char		*h;
+	size_t	i;
+	size_t	neg;
 
-	h = "0123456789";
-	i = (value < 0) ? 2 : 1;
-	n = value;
-	while (n /= 10)
-		i++;
-	if ((s = (char*)malloc(sizeof(char) * i + 1)) == 0)
-		return (NULL);
-	s[i] = 0;
-	if (value < 0)
-		s[0] = '-';
-	if (value == 0)
-		s[0] = '0';
-	n = value;
-	while (n)
+	i = 0;
+	neg = 0;
+	if (nbr)
 	{
-		s[--i] = h[(n < 0) ? -(n % 10) : n % 10];
-		n /= 10;
+		if (nbr < 0)
+		{
+			neg = 1;
+			nbr = -nbr;
+		}
+		while (nbr > 0)
+		{
+			nbr = nbr / 10;
+			i++;
+		}
+		*len = i + neg;
 	}
-	return (s);
+	return (ft_strnew(*len));
+}
+
+static void	write_to_str(char *str, unsigned long long nbr, size_t pos)
+{
+	if (nbr > 9)
+	{
+		str[pos] = (nbr % 10) + '0';
+		nbr = nbr / 10;
+		pos--;
+		write_to_str(str, nbr, pos);
+	}
+	else
+		str[pos] = (nbr % 10) + '0';
+	return ;
+}
+
+char		*ft_itoa(long long nbr)
+{
+	char	*res;
+	size_t	len;
+
+	if (nbr == LLONG_MIN)
+		return (ft_strdup("-9223372036854775808"));
+	len = 1;
+	res = allocate(nbr, &len);
+	if (res)
+	{
+		if (nbr < 0)
+		{
+			res[0] = '-';
+			nbr = -nbr;
+			len--;
+			write_to_str(res, nbr, len);
+			return (res);
+		}
+		write_to_str(res, nbr, len - 1);
+		return (res);
+	}
+	return (NULL);
 }

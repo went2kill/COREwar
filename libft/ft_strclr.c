@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 14:10:30 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/04 14:16:59 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/11/24 16:39:00 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/11/24 16:39:01 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_strclr(char *c)
+void	ft_strclr(char *s)
 {
-	if (c)
-		while (*c)
-			*(c++) = '\0';
+	if (s)
+		while (*s != '\0')
+		{
+			*s = '\0';
+			s++;
+		}
 }

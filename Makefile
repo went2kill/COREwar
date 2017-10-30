@@ -1,56 +1,92 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/08/08 19:01:12 by yrobotko          #+#    #+#              #
-#    Updated: 2017/10/23 18:46:26 by yrobotko         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+UNAME := $(shell uname)
 
-NAME = asm
+ifeq ($(UNAME), Darwin)
+	CC = gcc
+endif
+ifeq ($(UNAME), Linux)
+	CC = c99
+endif
 
-G = gcc
+FAST = -Ofast
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC =   asm.c \
-		asm0.c \
-		asm1.c \
-		asm2.c \
-		asm3.c \
-		asm4.c \
-		asm5.c \
-		asm6.c \
-		asm7.c \
-		asm8.c \
-		asm9.c \
-		asm10.c \
-		asm11.c \
-		asm12.c \
-		asm13.c \
+NAME = corewar
+
+SRC = ./vm/nekit_main.c\
+		./vm_valid/main.c\
+		./vm_valid/init_struct.c\
+		./vm_valid/valid_file_cmd_name.c\
+		./vm_valid/vm_file_data_check.c\
+		./vm_valid/vm_parse_data.c\
+		./vm_valid/vm_save_data_bot.c\
+		./vm_valid/vm_valid_cmd_file.c\
+		./vm_valid/vm_valid_file_data.c\
+		./viz/bots_draw.c\
+		./viz/drawing.c\
+		./viz/fill_memory.c\
+		./viz/pause.c\
+		./viz/set_values.c\
+		./viz/set_values_2.c\
+		./viz/start_draw.c\
+		./viz/help.c\
+		./vm/hex_print.c\
+		./vm_valid/vm_parse_data2.c\
+		./vm/func1.c\
+		./vm/func2.c\
+		./vm/func3.c\
+		./vm/func4.c\
+		./vm/func5.c\
+		./vm/func6.c\
+		./vm/func7.c\
+		./vm/func8.c\
+		./vm/func9.c\
+		./vm/func10.c\
+		./vm/func11.c
 
 OBJ = $(SRC:.c=.o)
 
-DEL = rm -f
+LIBOBJ = libft/*.o
 
-LIB = libft/libft.a
+INC = -I ./ -I ./libft/ -I ./viz/
+
+LIB = -L ./libft -lft
+
+LIBMAKE = make -C libft/
+
+MAKEASM = make -C assembler/
 
 all: $(NAME)
 
-$(NAME) : $(OBJ)
-	make -C ./libft/ re
-	gcc $(FLAG) $(LIB) $(OBJ) -o $(NAME) 
-%.o: %.c
-	$(G) $(FLAGS) -c -o $@ $<
-clean:
-	$(DEL) $(OBJ)
-	$(DEL) libft/*.o
-fclean: clean
-	$(DEL) $(NAME)
-	$(DEL) libft.a
-	$(DEL) libft/libft.a
-re:	fclean all
+$(NAME): $(OBJ)
+	@$(LIBMAKE) all
+	@$(MAKEASM) all
+	@$(CC) $(FLAGS) $(INC) $(LIB) $(OBJ) -lncurses -o $(NAME)
+	@echo  "\033[32mCompiled and created Corewar (VM) binary\033[0m"
 
+%.o: %.c
+	@$(CC) $(INC) $(FAST) $(FLAGS) -c -o $@ $<
+
+clean: libclean
+	@$(MAKEASM) clean
+	@rm -f $(OBJ)
+	@echo "\033[01;31mCorewar (VM) object files deleted\033[0m"
+
+fclean: libfclean clean
+	@$(MAKEASM) fclean
+	@rm -rf *.dSYM
+	@rm -f $(NAME) a.out
+	@echo "\033[01;31mCorewar (VM) binary file deleted\033[0m"
+
+re: fclean all
+
+liball:
+	@$(LIBMAKE) all
+
+libclean:
+	@$(LIBMAKE) clean
+libfclean:
+	@$(LIBMAKE) fclean
+
+libre:
+	@$(LIBMAKE) re

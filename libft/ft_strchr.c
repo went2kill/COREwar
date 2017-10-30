@@ -3,22 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 17:01:01 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/08 21:14:35 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/11/24 18:06:05 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/11/24 18:06:05 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
-	while (*s != (char)c)
+	size_t i;
+
+	i = 0;
+	if (s)
 	{
-		if (*s == '\0')
-			return (0);
-		s++;
+		if (c != 0)
+		{
+			while (s[i] != '\0')
+			{
+				if (s[i] != c)
+					i++;
+				else
+					return (&s[i]);
+			}
+		}
+		else
+			return (&s[ft_strlen(s)]);
 	}
-	return ((char*)s);
+	return (NULL);
 }

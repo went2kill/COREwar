@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 18:56:05 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/15 20:35:25 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/12/01 22:46:10 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/12/01 22:46:11 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	ft_putendl_fd(char const *s, int fd)
 	if (s)
 	{
 		ft_putstr_fd(s, fd);
-		write(fd, "\n", 1);
+		ft_putchar_fd('\n', fd);
 	}
 }

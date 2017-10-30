@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 19:14:00 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/04 16:54:48 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/11/22 19:00:07 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/11/22 19:00:09 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isascii(int c)
+int	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
+	return ((c >= 0 && c <= 127) ? 1 : 0);
 }

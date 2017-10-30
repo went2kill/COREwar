@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 17:38:47 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/06 18:59:10 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/11/22 18:59:53 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/11/22 18:59:56 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalpha(int c)
+int	ft_isalpha(int c)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-		return (1);
-	return (0);
+	return (((c > 64 && c < 91) || (c > 96 && c < 123)) ? 1 : 0);
 }

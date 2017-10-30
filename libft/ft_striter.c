@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 14:20:02 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/04 14:46:11 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/12/01 20:44:07 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/12/01 20:44:08 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,5 @@ void	ft_striter(char *s, void (*f)(char *))
 	if (s && f)
 		while (*s)
 			f(s++);
+	return ;
 }

@@ -3,34 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 18:12:15 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/01 16:26:32 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/11/24 18:56:14 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/11/24 18:56:15 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *big, const char *little)
+char	*ft_strstr(const char *big, const char *s2)
 {
-	char *ptrb;
-	char *ptrl;
+	size_t	b;
+	size_t	l;
+	size_t	max_len;
 
-	if (*little == 0)
-		return ((char*)big);
-	while (*big)
+	if (s2[0] != '\0' && s2 != NULL)
 	{
-		ptrb = (char*)big;
-		ptrl = (char*)little;
-		while (*ptrb == *ptrl && *ptrl)
+		if (big)
 		{
-			ptrb++;
-			ptrl++;
+			max_len = ft_strlen(big) - ft_strlen(s2);
+			b = 0;
+			while (big[b] != '\0' && b <= max_len)
+			{
+				l = 0;
+				while (big[b] != '\0' && s2[l] != '\0' && big[b + l] == s2[l])
+					l++;
+				if (s2[l] == '\0')
+					return ((char *)(&big[b]));
+				b++;
+			}
 		}
-		if (*ptrl == '\0')
-			return ((char*)big);
-		big++;
+		return (NULL);
 	}
-	return (0);
+	return ((char *)(big));
 }

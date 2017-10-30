@@ -3,44 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 16:18:00 by yrobotko          #+#    #+#             */
-/*   Updated: 2017/08/14 16:17:56 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/11/25 18:24:00 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/11/25 18:24:01 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-static char	*skip_ws_symb(const char *str)
+long long	ft_atoi(const char *str)
 {
-	char	*new_str;
+	long long	result;
+	int			is_neg;
+	int			i;
 
-	new_str = (char *)((size_t)str);
-	while (ft_isspace(*new_str))
-		new_str++;
-	return (new_str);
-}
-
-int			ft_atoi(const char *str)
-{
-	char	sign;
-	int		result;
-	char	*str_no_ws;
-
-	sign = 1;
 	result = 0;
-	if (!*str)
-		return (0);
-	str_no_ws = skip_ws_symb(str);
-	if (*str_no_ws == '+')
-		str_no_ws++;
-	else if (*str_no_ws == '-')
+	is_neg = 0;
+	i = 0;
+	while ((str[i] == ' ') || (str[i] == '\t') || (str[i] == '\n')
+			|| (str[i] == '\v') || (str[i] == '\f') || (str[i] == '\r'))
+		i++;
+	if (str[i] == 45)
+		is_neg = 1;
+	if ((str[i] == 45) || (str[i] == 43))
+		i++;
+	while ((str[i] >= 48) && (str[i] <= 57))
 	{
-		str_no_ws++;
-		sign = -1;
+		result *= 10;
+		result += ((int)str[i] - 48);
+		i++;
 	}
-	while (*str_no_ws && ft_isdigit(*str_no_ws))
-		result = result * 10 + (*(str_no_ws++)) - '0';
-	return (sign * result);
+	if (is_neg)
+		return (-result);
+	else
+		return (result);
 }

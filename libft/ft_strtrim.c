@@ -3,50 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 18:42:31 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/15 20:25:24 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/12/02 15:19:43 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/12/02 15:19:44 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Allocates (with malloc) and returns a copy of the string
+** given as argument without whitespaces at the beginning or at
+** the end of the string. Will be considered as whitespaces the
+** following characters ’ ’, ’\n’ and ’\t’. If s has no whitespaces
+** at the beginning or at the end, the function returns a
+** copy of s. If the allocation fails the function returns NULL.
+*/
+
 #include "libft.h"
 
-static	void	fillstr(char *dst, char const *str, size_t from, size_t to)
+char	*ft_strtrim(char const *s)
 {
-	size_t	a;
+	int		end;
+	int		start;
+	char	*new_str;
 
-	a = 0;
-	while (from <= to)
-		dst[a++] = str[from++];
-	dst[a] = '\0';
-}
-
-char			*ft_strtrim(char const *s)
-{
-	char	*str;
-	size_t	i;
-	size_t	q;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
-		i++;
-	q = ft_strlen(s) - 1;
-	if (i != ft_strlen(s))
+	if (s)
 	{
-		while (s[q] == ' ' || s[q] == '\n' || s[q] == '\t')
-			q--;
-		str = (char *)malloc(sizeof(char) * (q - i + 2));
+		start = ft_strcstr(s, " \n\t", 0);
+		end = ft_strcstr(s, " \n\t", 1);
+		if (start >= 0 && end >= 0)
+		{
+			new_str = ft_strnew(end - start + 1);
+			if (new_str)
+				return (ft_strncpy(new_str, &s[start], end - start + 1));
+			return (NULL);
+		}
 	}
-	else if ((str = (char*)malloc(sizeof(char) * 1)))
-	{
-		*str = '\0';
-		return (str);
-	}
-	if (!str)
-		return (0);
-	fillstr(&str[0], s, i, q);
-	return (str);
+	return (ft_strnew(0));
 }

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 19:22:13 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/02 19:24:42 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/11/22 19:01:11 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/11/22 19:01:12 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
+int	ft_toupper(int c)
 {
-	if (c >= 97 && c <= 122)
-		return (c - 32);
-	return (c);
+	return ((c > 96 && c < 123) ? (c - 32) : c);
 }

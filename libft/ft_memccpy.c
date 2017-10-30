@@ -3,29 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/22 17:54:20 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/08 20:16:32 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/11/25 19:42:06 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/11/25 19:42:07 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libft.h"
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	size_t	count;
+	unsigned char	*u_dst;
+	unsigned char	*u_src;
+	unsigned char	u_c;
 
-	count = 0;
-	if (n != 0)
+	u_c = (unsigned char)c;
+	u_dst = (unsigned char *)dst;
+	u_src = (unsigned char *)src;
+	while (n > 0)
 	{
-		while (count < n)
+		if (*u_src == u_c)
 		{
-			((char*)dst)[count] = ((char*)src)[count];
-			if (((char*)src)[count] == (char)c)
-				return (dst + count + 1);
-			count++;
+			*u_dst = *u_src;
+			return (++u_dst);
 		}
+		*u_dst = *u_src;
+		u_dst++;
+		u_src++;
+		n--;
 	}
-	return (0);
+	return (NULL);
 }

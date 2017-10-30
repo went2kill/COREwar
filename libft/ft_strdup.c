@@ -3,23 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/27 16:33:13 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/08 21:04:21 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/11/22 19:09:25 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/11/22 19:09:27 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *str)
+char	*ft_strdup(const char *s1)
 {
-	size_t	len;
-	char	*copy;
+	unsigned long	i;
+	char			*s2;
 
-	len = ft_strlen(str);
-	if (!(copy = (char*)malloc(sizeof(char) * (len + 1))))
-		return (0);
-	ft_strcpy(copy, str);
-	return (copy);
+	s2 = (char *)malloc((ft_strlen(s1) + 1) * sizeof(char));
+	i = 0;
+	if (s2)
+	{
+		while (s1[i] != '\0')
+		{
+			s2[i] = s1[i];
+			i++;
+		}
+	}
+	else
+	{
+		write(2, "\nCannot allocate memory in ft_strdup!\n", 38);
+		return (NULL);
+	}
+	s2[i] = '\0';
+	return (s2);
 }

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 19:01:15 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/02 19:03:00 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/11/22 19:00:27 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/11/22 19:00:28 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
+	return ((c > 47 && c < 58) ? 1 : 0);
 }

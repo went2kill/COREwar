@@ -3,38 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 14:49:45 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/16 16:31:45 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/12/07 16:50:05 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/12/07 16:50:05 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Description: Allocates (with malloc(3)) and returns a “fresh” link.
+** The variables content and content_size of the new link are ini- tialized by
+** copy of the parameters of the function. If the pa- rameter content is nul,
+** the variable content is initialized to NULL and the variable content_size is
+** initialized to 0 even if the parameter content_size isn’t. The variable next
+** is initialized to NULL. If the allocation fails, the function returns NULL.
+** Param. #1: The content to put in the new link.
+** Param. #2: The size of the content of the new link.
+** Return value: The new link.
+*/
+
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	void	*data;
-	t_list	*newlst;
+	t_list	*new;
 
-	if (!(newlst = (t_list*)malloc(sizeof(t_list))))
-		return (0);
-	if (!content || content_size == 0)
+	new = (t_list *)malloc(sizeof(t_list));
+	if (new)
 	{
-		newlst->content = 0;
-		newlst->content_size = 0;
-		newlst->next = 0;
-	}
-	else
-	{
-		data = (void*)malloc(sizeof(void) * content_size);
-		if (data)
+		new->next = NULL;
+		if (content)
 		{
-			ft_memmove(data, content, content_size);
-			newlst->content = data;
-			newlst->content_size = content_size;
-			newlst->next = 0;
+			new->content = (void *)malloc(content_size);
+			ft_memcpy(new->content, content, content_size);
+			new->content_size = content_size;
+			return (new);
 		}
+		new->content = NULL;
+		new->content_size = 0;
+		return (new);
 	}
-	return (newlst);
+	return (NULL);
 }

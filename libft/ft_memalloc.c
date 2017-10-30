@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 16:48:29 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/15 21:19:41 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/12/01 19:53:00 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/12/01 19:53:00 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 void	*ft_memalloc(size_t size)
 {
-	size_t	n;
-	void	*area;
+	unsigned char	*ptr;
 
-	area = (void*)malloc(sizeof(void) * size);
-	if (area)
+	ptr = (unsigned char *)malloc(size);
+	if (ptr)
 	{
-		n = 0;
-		while (n < size)
-			((char*)area)[n++] = 0;
+		ft_bzero(ptr, size);
 	}
-	return (area);
+	else
+	{
+		write(2, "\nCannot allocate memory in ft_memalloc!\n", 40);
+	}
+	return ((void *)ptr);
 }

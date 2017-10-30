@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrobotko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpochuka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/07 21:21:27 by yrobotko          #+#    #+#             */
-/*   Updated: 2016/12/07 21:21:59 by yrobotko         ###   ########.fr       */
+/*   Created: 2016/12/01 22:48:23 by mpochuka          #+#    #+#             */
+/*   Updated: 2016/12/01 22:48:24 by mpochuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,24 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned nmb;
-
+	if (n == -2147483648)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd('2', fd);
+		n = 147483648;
+	}
 	if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
-		nmb = n * -1;
+		n = -n;
+	}
+	if (n < 10)
+	{
+		ft_putchar_fd(n + '0', fd);
 	}
 	else
-		nmb = n;
-	if (nmb < 10)
-		ft_putchar_fd(nmb + '0', fd);
-	else
 	{
-		ft_putnbr_fd(nmb / 10, fd);
-		ft_putnbr_fd(nmb % 10, fd);
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
 	}
 }
